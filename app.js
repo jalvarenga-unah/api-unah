@@ -32,7 +32,9 @@ app.use(userRoutes) // la adicion de las rutas de el recurso de Usuarios
 
 // La creacion de las rutas de mi aplicación
 app.get('/', (req, res) => {
-    res.send('Hola mundo desde Express js')
+    res.status(404).json({
+        message: 'Not Found'
+    })
 
 })
 
