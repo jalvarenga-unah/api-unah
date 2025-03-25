@@ -3,6 +3,8 @@ import userRoutes from './router/users.js'
 import authRoutes from './router/auth.js'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import helmet from 'helmet'
+import xss from 'xss-clean'
 
 // createServer
 const app = express() // "creando la instancia de express"
@@ -14,6 +16,8 @@ app.disable('x-powered-by') // "desactivando la cabecera x-powered-by"
 // Middlewares
 
 // me permite recibir datos en formato json en el body de la solicitud
+app.use(helmet())
+app.use(xss())
 app.use(json())
 app.use(cors({
     // origin: 'http://localhost:53734'
@@ -24,6 +28,7 @@ app.use(cors({
     // ],
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 })) // <- habilita todos los origenes de peticiones
 
 //Rutas
